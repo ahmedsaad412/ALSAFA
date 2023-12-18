@@ -68,7 +68,9 @@ namespace ALSAFA.Controllers
             return View(subCategory);
         }
 
+
         // GET: SubCategories/Edit/5
+       
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

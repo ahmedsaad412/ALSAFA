@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ALSAFA.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class MainController : Controller
     {
         private readonly IMainService _mainService;

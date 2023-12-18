@@ -46,7 +46,7 @@ namespace ALSAFA.Controllers
         }
 
         // GET: items/Create
-        [Authorize(Roles ="Admin")]
+        //[Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
             ViewData["SubID"] = new SelectList(_context.SubCategories, "Id", "Id");
@@ -58,7 +58,7 @@ namespace ALSAFA.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles ="Admin")]
+        //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> Create([Bind("Id,Name,Price,Count,SubID")] item item)
         {
             if (ModelState.IsValid)
