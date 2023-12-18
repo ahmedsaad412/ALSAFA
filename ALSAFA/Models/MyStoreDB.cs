@@ -13,7 +13,7 @@ namespace ALSAFA.Models
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<item> items { get; set; }
 
-
+        //comment
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
