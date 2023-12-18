@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ALSAFA.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .category-header {
+            background-color: beige;
+            font-weight: 700;
+            padding: 0.75rem 0px;
+            border: 1px solid gray;
+        }
+
+
+        .sub-category-header {
+            background-color: azure;
+            font-weight: 500;
+            padding: 0.5rem 0px;
+            border: 1px solid gray;
+
+        }
+
+        .product {
+            background-color: ghostwhite;
+            font-weight: 400;
+            padding: 0.25rem 0px;
+            border: 1px solid gray;
+        }
+</style>
+<h1 class="text-center text-black"> DataSet</h1>
+
+<p>
+    <a asp-controller="items" asp-action="Create"> Create New</a>
+</p>
+<div class="container text-center">
+    @foreach(var cat in Model)
+    {
+        
+    
+    <div class="category">
+        <div class="row align-items-start category-header ">
+            <div class="col">
+                 @cat.CName
+            </div>
+            <div class="col">
+                    Amount : @cat.SubCategories.Aggregate(0, (acc, subCat) => {
+                       return acc + subCat.items!.Aggregate(0 , (acc , item) => acc + item.Count);
+                    })
+            </div>
+            <div class="col">
+                    Price :  @cat.SubCategories.Aggregate(0, (acc, subCat) =>
+                        {
+                            return acc + subCat.items!.Aggregate(0, (acc, item) => acc + (item.Count * item.Price));
+                        }) $
+            </div>
+        </div>
+        @foreach (var subCat in cat.SubCategories)
+            {
+                
+            
+        <div class="sub-category">
+            <div class="row sub-category-header">
+                <div class="col">
+                             @subCat.Name
+                </div>
+                <div class="col">
+                            Amount : @subCat.items!.Aggregate(0,(acc , item) => acc + item.Count ) items
+                             @* Amount : @subCat.items.Aggregate(a=>a.Price*a.Count); items  *@
+                </div>
+                <div class="col">
+                            Price : @subCat.items!.Aggregate(0, (acc, item) => acc + (item.Count * item.Price)) $
+                </div>
+            </div>
+            @foreach(var product in subCat.items){
+            <div class="row product">
+                <div class="col">
+                     @product.Name
+                </div>
+                <div class="col">
+                                Count : @product.Count
+                </div>
+                <div class="col">
+                   unit Price : @product.Price 
+                </div>
+                <div class="col">
+                   total Price : @(product.Price * product.Count)
+                </div>
+            </div>
+
+            
+            }
+        </div>
+        }
+    </div>
+    }
+</div>
